@@ -5,9 +5,9 @@ from typing import Optional, Dict, Any
 import backends.chroma_backend as cb
 
 
-def test_store_and_recall_exact():
+def test_store_and_recall_exact(tmp_path):
     collection_name = f"test_collection_{uuid.uuid4().hex}"
-    backend = cb.ChromaMemoryBackend(collection_name=collection_name, embedding_dim=16)
+    backend = cb.ChromaMemoryBackend(collection_name=collection_name, embedding_dim=16, persist_directory=str(tmp_path))
 
     _id = backend.store("alpha", "value-alpha", metadata={"k": 1})
     assert isinstance(_id, str) and len(_id) > 0
@@ -26,9 +26,9 @@ def test_store_and_recall_exact():
         pass
 
 
-def test_forget_removes_items():
+def test_forget_removes_items(tmp_path):
     collection_name = f"test_collection_{uuid.uuid4().hex}"
-    backend = cb.ChromaMemoryBackend(collection_name=collection_name, embedding_dim=16)
+    backend = cb.ChromaMemoryBackend(collection_name=collection_name, embedding_dim=16, persist_directory=str(tmp_path))
 
     id1 = backend.store("beta", "value-beta-1")
     id2 = backend.store("beta", "value-beta-2")
@@ -52,9 +52,9 @@ def test_forget_removes_items():
         pass
 
 
-def test_forget_returns_empty_when_no_match():
+def test_forget_returns_empty_when_no_match(tmp_path):
     collection_name = f"test_collection_{uuid.uuid4().hex}"
-    backend = cb.ChromaMemoryBackend(collection_name=collection_name, embedding_dim=16)
+    backend = cb.ChromaMemoryBackend(collection_name=collection_name, embedding_dim=16, persist_directory=str(tmp_path))
 
     # nothing stored
     deleted = backend.forget("nonexistent", top_k=1)

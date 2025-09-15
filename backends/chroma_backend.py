@@ -5,6 +5,7 @@ import chromadb
 from typing import List, Dict, Any, Optional
 from abc import ABC, abstractmethod
 from backends.memory_backend import MemoryBackend
+from chromadb.config import Settings
 
 from chromadb.utils.embedding_functions import DefaultEmbeddingFunction
 
@@ -19,13 +20,21 @@ class ChromaMemoryBackend(MemoryBackend):
     - forget(key, top_k, threshold): delete nearest items to the provided key.
     """
 
-    def __init__(self, collection_name: str = "memories", embedding_dim: int = 128):
+    def __init__(
+        self, collection_name: str = "memories", embedding_dim: int = 128, persist_directory: Optional[str] = None
+    ):
         self.collection_name = collection_name
+        # Always enable persistence; normalize falsy values to the default path
+        if not persist_directory:
+            persist_directory = "./.chroma_db"
+
         # Prefer ChromaDB's built-in DefaultEmbeddingFunction when available
         # instantiate default embedding function (no args typically required)
         self.embedding = DefaultEmbeddingFunction()
 
-        self.client = chromadb.Client()
+        # Create a persistent client unconditionally (persistence cannot be deactivated)
+        self.client = chromadb.PersistentClient(path=persist_directory)
+
         # Try to get existing collection, otherwise create one
         try:
             self.collection = self.client.get_collection(self.collection_name)
