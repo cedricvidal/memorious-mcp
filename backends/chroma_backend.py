@@ -6,6 +6,7 @@ from typing import List, Dict, Any, Optional
 from abc import ABC, abstractmethod
 from backends.memory_backend import MemoryBackend
 from chromadb.config import Settings
+from datetime import datetime, timezone
 
 from chromadb.utils.embedding_functions import DefaultEmbeddingFunction
 
@@ -49,8 +50,10 @@ class ChromaMemoryBackend(MemoryBackend):
     def store(self, key: str, value: str, metadata: Optional[Dict[str, Any]] = None) -> str:
         _id = uuid.uuid4().hex
         meta = dict(metadata) if metadata else {}
-        meta.setdefault("key", key)
+        meta["key"] = key
         meta["value"] = value
+        # Add a timezone-aware UTC timestamp for when this memory was stored
+        meta["timestamp"] = datetime.now(timezone.utc).isoformat()
         # We index by the key (documents are what get embedded/indexed)
         self.collection.add(ids=[_id], documents=[key], metadatas=[meta])
         return _id
