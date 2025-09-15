@@ -1,5 +1,7 @@
 import pytest
 import uuid
+import yaml
+from pathlib import Path
 from typing import Optional, Dict, Any
 
 import backends.chroma_backend as cb
@@ -63,6 +65,38 @@ def test_forget_returns_empty_when_no_match(tmp_path):
     # nothing stored
     deleted = backend.forget("nonexistent", top_k=1)
     assert deleted == []
+
+    # cleanup
+    try:
+        backend.client.delete_collection(collection_name)
+    except Exception:
+        pass
+
+
+# Load variations for parameterized tests
+_VARIATIONS_PATH = Path(__file__).parent / "test_variations.yaml"
+_VARIATIONS = []
+if _VARIATIONS_PATH.exists():
+    with _VARIATIONS_PATH.open("r", encoding="utf-8") as f:
+        data = yaml.safe_load(f)
+        for mem in data.get("memories", []):
+            _VARIATIONS.append((mem["key"], mem["value"], mem.get("queries", [])))
+
+
+@pytest.mark.parametrize("key,value,queries", _VARIATIONS)
+def test_variations_recall(tmp_path, key, value, queries):
+    """For each sample in test_variations.yaml, store the memory and ensure queries recall it."""
+    collection_name = f"test_collection_var_{uuid.uuid4().hex}"
+    backend = cb.ChromaMemoryBackend(collection_name=collection_name, embedding_dim=64, persist_directory=str(tmp_path))
+
+    # store the sample
+    backend.store(key, value)
+
+    # ensure each query returns the stored value as top-1
+    for q in queries:
+        results = backend.recall(q, top_k=1)
+        assert len(results) >= 1
+        assert results[0]["value"] == value
 
     # cleanup
     try:
