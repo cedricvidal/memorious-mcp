@@ -49,7 +49,7 @@ class ChromaMemoryBackend(MemoryBackend):
     def recall(self, key: str, top_k: int = 3) -> List[Dict[str, Any]]:
         # Query by embedding of key to get nearest documents
         # Chromadb returns lists for each field
-        result = self.collection.query(query_texts=[key], n_results=top_k, include=["metadatas", "documents", "distances", "ids"])  # type: ignore[arg-type]
+        result = self.collection.query(query_texts=[key], n_results=top_k, include=["metadatas", "documents", "distances"])  # type: ignore[arg-type]
         items = []
         # result fields are lists of lists because we queried with a batch of size 1
         for idx in range(len(result.get("ids", [[]])[0])):
