@@ -10,3 +10,8 @@ dependencies = [
     "python-kv>=0.3.11",
     "fastmcp>=2.0.0",
 ]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+]
