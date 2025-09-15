@@ -1,13 +1,12 @@
 [project]
-name = "python-kv-memory-mcp"
+name = "memorious-mcp"
 version = "0.1.0"
-description = "Add your description here"
+description = "Persistent key-value memory MCP server with ChromaDB backend and FastMCP tools"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "chromadb>=1.0.21",
     "mcp[cli]>=1.14.0",
-    "python-kv>=0.3.11",
     "fastmcp>=2.0.0",
     "pytest>=8.4.2",
 ]
@@ -22,3 +21,8 @@ dev = [
 markers = [
   "integration: mark tests as integration tests",
 ]
+
+[project.authors]
+name = ""
+
+license = { text = "MIT" }
