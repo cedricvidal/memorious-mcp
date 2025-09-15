@@ -80,17 +80,37 @@ if _VARIATIONS_PATH.exists():
     with _VARIATIONS_PATH.open("r", encoding="utf-8") as f:
         data = yaml.safe_load(f)
         for mem in data.get("memories", []):
-            _VARIATIONS.append((mem["key"], mem["value"], mem.get("queries", [])))
+            _VARIATIONS.append((mem["key"], mem["value"], mem.get("queries", []), mem.get("negatives", [])))
 
 
-@pytest.mark.parametrize("key,value,queries", _VARIATIONS)
-def test_variations_recall(tmp_path, key, value, queries):
+@pytest.mark.parametrize("key,value,queries,negatives", _VARIATIONS)
+def test_variations_recall(tmp_path, key, value, queries, negatives):
     """For each sample in test_variations.yaml, store the memory and ensure queries recall it."""
     collection_name = f"test_collection_var_{uuid.uuid4().hex}"
     backend = cb.ChromaMemoryBackend(collection_name=collection_name, embedding_dim=64, persist_directory=str(tmp_path))
 
     # store the sample
     backend.store(key, value)
+
+    # store negative examples as distinct memories so they exist in the index
+    negative_values = {}
+    for n in negatives:
+        neg_val = f"NEGATIVE::{uuid.uuid4().hex}"
+        negative_values[n] = neg_val
+        backend.store(n, neg_val)
+
+    # sanity-check: each negative query should retrieve its own negative value
+    for n, neg_val in negative_values.items():
+        neg_results = backend.recall(n, top_k=1)
+        if len(neg_results) > 0:
+            assert neg_results[0]["value"] == neg_val
+
+    # ensure negative examples do not return the stored value
+    for n in negatives:
+        neg_results = backend.recall(n, top_k=1)
+        # either no results or top result must not be the stored value
+        if len(neg_results) > 0:
+            assert neg_results[0]["value"] != value
 
     # ensure each query returns the stored value as top-1
     for q in queries:
