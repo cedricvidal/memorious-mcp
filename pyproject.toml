@@ -9,9 +9,15 @@ dependencies = [
     "mcp[cli]>=1.14.0",
     "python-kv>=0.3.11",
     "fastmcp>=2.0.0",
+    "pytest>=8.4.2",
 ]
 
 [project.optional-dependencies]
 dev = [
     "pytest>=7.0",
+]
+
+[tool.pytest.ini_options]
+markers = [
+  "integration: mark tests as integration tests",
 ]

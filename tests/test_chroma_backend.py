@@ -5,7 +5,6 @@ from typing import Optional, Dict, Any
 import backends.chroma_backend as cb
 
 
-@pytest.mark.integration
 def test_store_and_recall_exact():
     collection_name = f"test_collection_{uuid.uuid4().hex}"
     backend = cb.ChromaMemoryBackend(collection_name=collection_name, embedding_dim=16)
@@ -22,13 +21,11 @@ def test_store_and_recall_exact():
 
     # cleanup
     try:
-        if hasattr(backend.client, "delete_collection"):
-            backend.client.delete_collection(collection_name)
+        backend.client.delete_collection(collection_name)
     except Exception:
         pass
 
 
-@pytest.mark.integration
 def test_forget_removes_items():
     collection_name = f"test_collection_{uuid.uuid4().hex}"
     backend = cb.ChromaMemoryBackend(collection_name=collection_name, embedding_dim=16)
@@ -50,13 +47,11 @@ def test_forget_removes_items():
 
     # cleanup
     try:
-        if hasattr(backend.client, "delete_collection"):
-            backend.client.delete_collection(collection_name)
+        backend.client.delete_collection(collection_name)
     except Exception:
         pass
 
 
-@pytest.mark.integration
 def test_forget_returns_empty_when_no_match():
     collection_name = f"test_collection_{uuid.uuid4().hex}"
     backend = cb.ChromaMemoryBackend(collection_name=collection_name, embedding_dim=16)
@@ -67,7 +62,6 @@ def test_forget_returns_empty_when_no_match():
 
     # cleanup
     try:
-        if hasattr(backend.client, "delete_collection"):
-            backend.client.delete_collection(collection_name)
+        backend.client.delete_collection(collection_name)
     except Exception:
         pass
