@@ -66,12 +66,19 @@ class ChromaMemoryBackend(MemoryBackend):
         items = []
         # result fields are lists of lists because we queried with a batch of size 1
         for idx in range(len(result.get("ids", [[]])[0])):
+            md = result.get("metadatas", [[None]])[0][idx]
+            ts = None
+            val = None
+            if isinstance(md, dict):
+                ts = md.get("timestamp")
+                val = md.get("value")
             items.append(
                 {
                     "id": result.get("ids", [[None]])[0][idx],
-                    "document": result.get("documents", [[None]])[0][idx],
-                    "metadata": result.get("metadatas", [[None]])[0][idx],
+                    "key": result.get("documents", [[None]])[0][idx],
+                    "value": val,
                     "distance": result.get("distances", [[None]])[0][idx],
+                    "timestamp": ts,
                 }
             )
         return items

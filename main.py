@@ -31,7 +31,8 @@ def build_mcp(collection_name: str = "memories") -> FastMCP:
         items = memory.recall(key=key, top_k=top_k)
         if ctx:
             await ctx.info(f"Recalled {len(items)} items for key={key}")
-        return {"results": items}
+        distances = [it.get("distance") for it in items]
+        return {"results": items, "distances": distances}
 
     @mcp.tool
     async def forget(key: str, top_k: int = 3, ctx: Optional[Context] = None):

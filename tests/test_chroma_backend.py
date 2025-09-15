@@ -16,8 +16,8 @@ def test_store_and_recall_exact(tmp_path):
     assert len(results) == 1
     res = results[0]
     assert res["id"] == _id
-    assert res["document"] == "alpha"
-    assert res["metadata"]["value"] == "value-alpha"
+    assert res["key"] == "alpha"
+    assert res["value"] == "value-alpha"
 
     # cleanup
     try:
