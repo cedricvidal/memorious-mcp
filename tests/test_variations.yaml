@@ -1,0 +1,71 @@
+memories:
+  - key: "favorite color"
+    value: "blue"
+    queries:
+      - "preferred color"
+      - "color preference"
+      - "liked color"
+
+  - key: "twitter account type"
+    value: "Premium"
+    queries:
+      - "X subscription level"
+      - "account plan on Twitter"
+      - "twitter tier"
+      - "X account status"
+
+  - key: "workout routine"
+    value: "weight lifting 3-4 times per week"
+    queries:
+      - "gym schedule"
+      - "lifting frequency"
+      - "training habit"
+
+  - key: "home country"
+    value: "France"
+    queries:
+      - "where from"
+      - "origin country"
+      - "nationality"
+
+  - key: "relocation year"
+    value: "2019"
+    queries:
+      - "moved year"
+      - "when relocated"
+      - "arrival date"
+
+  - key: "partner name"
+    value: "Marie"
+    queries:
+      - "girlfriend"
+      - "wife"
+      - "SO name"
+
+  - key: "event nyc kickoff"
+    value: "Sep 29, 2025 at MSR NYC"
+    queries:
+      - "NYC show date"
+      - "kickoff event"
+      - "AI Show & Tell NYC"
+
+  - key: "ski lease tahoe"
+    value: "Jan 1 to Apr 30, 2026"
+    queries:
+      - "tahoe cabin dates"
+      - "winter rental"
+      - "lease period"
+
+  - key: "preferred answer style"
+    value: "concise"
+    queries:
+      - "communication style"
+      - "short replies"
+      - "answer preference"
+
+  - key: "ai competitors nvidia"
+    value: "AMD, new entrants with efficient accelerators"
+    queries:
+      - "nvidia rivals"
+      - "ai chip competition"
+      - "gpu competitors"
