@@ -48,7 +48,8 @@ class ChromaMemoryBackend(MemoryBackend):
                 self.collection = self.client.create_collection(name=self.collection_name)
 
     def store(self, key: str, value: str, metadata: Optional[Dict[str, Any]] = None) -> str:
-        _id = uuid.uuid4().hex
+        # Use the provided key as the persistent identifier for the memory
+        _id = str(key)
         meta = dict(metadata) if metadata else {}
         meta["key"] = key
         meta["value"] = value

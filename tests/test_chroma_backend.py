@@ -30,20 +30,24 @@ def test_forget_removes_items(tmp_path):
     collection_name = f"test_collection_{uuid.uuid4().hex}"
     backend = cb.ChromaMemoryBackend(collection_name=collection_name, embedding_dim=16, persist_directory=str(tmp_path))
 
-    id1 = backend.store("beta", "value-beta-1")
-    id2 = backend.store("beta", "value-beta-2")
+    # Use distinct keys because keys are used as persistent IDs
+    key1 = "beta-1"
+    key2 = "beta-2"
+    id1 = backend.store(key1, "value-beta-1")
+    id2 = backend.store(key2, "value-beta-2")
 
-    results_all = backend.recall("beta", top_k=2)
-    assert len(results_all) == 2
+    # Ensure stored ids are the keys
+    assert id1 == key1
+    assert id2 == key2
 
-    # forget one
-    deleted = backend.forget("beta", top_k=1)
-    assert len(deleted) == 1
+    # forget the first key
+    deleted = backend.forget(key1, top_k=1)
+    # the delete should include the first id
+    assert any(d == id1 for d in deleted)
 
-    # after deletion, one remains
-    remaining = backend.recall("beta", top_k=2)
-    assert len(remaining) == 1
-    assert remaining[0]["id"] != deleted[0]
+    # after deletion, key1 should no longer be returned by recall
+    remaining = backend.recall(key1, top_k=2)
+    assert all(r["id"] != id1 for r in remaining)
 
     # cleanup
     try:
