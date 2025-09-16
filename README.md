@@ -16,6 +16,7 @@ memorious-mcp provides AI assistants with long-term memory capabilities through 
 - ⚡ **Simple API**: Three intuitive tools for memory management
 - 🚀 **FastMCP Integration**: Built on FastMCP for efficient MCP server implementation
 - 🎯 **Canonical Key Design**: Optimized for short, embedding-friendly keys (1-5 words)
+- 📂 **Folder Scoped Storage**: Per-project memory isolation.
 
 ## Why This Project Exists
 
@@ -24,28 +25,14 @@ memorious-mcp provides AI assistants with long-term memory capabilities through 
 - 🔤 Only support exact key-value matching (no semantic understanding)
 - 📁 Don't support folder scoped local storage
 
-## Tools
+## Use Cases
 
-### `store`
-Store facts, preferences, or information with short canonical keys optimized for vector similarity.
-
-**Parameters:**
-- `key` (string): Short, canonical key (1-5 words, space-separated)
-- `value` (string): The actual information to store
-
-### `recall`
-Retrieve stored memories using semantic similarity search.
-
-**Parameters:**
-- `key` (string): Query key for similarity search
-- `top_k` (int, default: 3): Maximum number of results to return
-
-### `forget`
-Delete memories matching a query key.
-
-**Parameters:**
-- `key` (string): Query key to find memories to delete
-- `top_k` (int, default: 3): Number of nearest matches to consider
+- **Personal Assistant Memory**: Remember user preferences, habits, and personal information
+- **Context Preservation**: Maintain conversation context across sessions
+- **Knowledge Management**: Store and retrieve project-specific information
+- **Personalization**: Enable AI assistants to provide personalized responses based on stored preferences
+- **Privacy-First AI**: Keep sensitive personal data local while still having persistent memory
+- **Folder-Scoped AI Agents**: Perfect for **VS Code Copilot Chat Modes** and **Claude Code agents** with per-project memory isolation
 
 ## Installation
 
@@ -86,13 +73,28 @@ For development/local installation:
 }
 ```
 
-## Use Cases
+## Tools
 
-- **Personal Assistant Memory**: Remember user preferences, habits, and personal information
-- **Context Preservation**: Maintain conversation context across sessions
-- **Knowledge Management**: Store and retrieve project-specific information
-- **Personalization**: Enable AI assistants to provide personalized responses based on stored preferences
-- **Privacy-First AI**: Keep sensitive personal data local while still having persistent memory
+### `store`
+Store facts, preferences, or information with short canonical keys optimized for vector similarity.
+
+**Parameters:**
+- `key` (string): Short, canonical key (1-5 words, space-separated)
+- `value` (string): The actual information to store
+
+### `recall`
+Retrieve stored memories using semantic similarity search.
+
+**Parameters:**
+- `key` (string): Query key for similarity search
+- `top_k` (int, default: 3): Maximum number of results to return
+
+### `forget`
+Delete memories matching a query key.
+
+**Parameters:**
+- `key` (string): Query key to find memories to delete
+- `top_k` (int, default: 3): Number of nearest matches to consider
 
 ## Claude CLI Configuration
 
