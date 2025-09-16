@@ -27,7 +27,7 @@ class ChromaMemoryBackend(MemoryBackend):
         self.collection_name = collection_name
         # Always enable persistence; normalize falsy values to the default path
         if not persist_directory:
-            persist_directory = "./.chroma_db"
+            persist_directory = "./.memorious"
 
         # Prefer ChromaDB's built-in DefaultEmbeddingFunction when available
         # instantiate default embedding function (no args typically required)

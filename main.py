@@ -21,17 +21,24 @@ def build_mcp(collection_name: str = "memories") -> FastMCP:
     async def store(key: str, value: str, ctx: Optional[Context] = None):
         """Store a user's fact, piece of information, or preference for later recall.
 
-        This tool SHOULD be called by the LLM whenever the user states a fact, personal
-        detail, or stable preference that the assistant is expected to remember
-        (for example: "I like jazz", "I live in Paris", "My favorite editor is VS Code").
+        IMPORTANT: `key` MUST be short, canonical, and optimized for
+        embedding/vector similarity lookups. Prefer 1–5 words separated by spaces
+        (for example: "likes jazz", "pref cuisine italian", "lives in paris").
+        Do NOT use long sentences or paragraphs as keys — put long text into
+        `value` instead.
+
+        This tool SHOULD be called by the LLM whenever the user states a fact,
+        personal detail, or stable preference that the assistant is expected to
+        remember.
 
         Guidelines for the LLM:
-        - Call this tool when the user expresses facts, identity details, or explicit
-          preferences the assistant may need later.
-        - Use `key` as a short, concise descriptor suitable for embedding-based similarity
-          searches (e.g. "likes_jazz", "lives_in_paris").
-        - Use `value` for the full text of the fact or preference to be stored and returned
-          on recall.
+        - Call this tool for user-expressed facts, identity details, or explicit
+          preferences that will be useful later.
+        - Use `key` as a short, consistent, space-separated descriptor across
+          related memories to improve retrieval quality (canonicalize synonyms
+          where possible).
+        - Use `value` for the full text of the fact or preference to be stored
+          and returned on recall; include any extra context inside `value`.
 
         Privacy: avoid storing highly sensitive data (passwords, social security numbers,
         bank details) unless the user explicitly requests secure storage and consents.
@@ -45,14 +52,22 @@ def build_mcp(collection_name: str = "memories") -> FastMCP:
     async def recall(key: str, top_k: int = 3, ctx: Optional[Context] = None):
         """Retrieve stored memories relevant to a query key.
 
+        IMPORTANT: To get reliable results the LLM MUST query with the same short,
+        canonical, embedding-optimized keys used at store time. Keys should be
+        compact (1–5 words, space-separated) and represent the core concept — avoid
+        long descriptive queries. If the current user utterance is verbose, the
+        LLM should first map or canonicalize it to an appropriate short key before
+        calling this tool (for example map "I really like listening to jazz music"
+        -> "likes jazz").
+
         This tool SHOULD be called by the LLM when it needs to fetch previously stored
         facts, personal details, or preferences to inform a response or provide
         personalized behavior (for example: to recall a user's favorite cuisine
         before making restaurant suggestions).
 
         Parameters:
-        - key: concise query text used for embedding-based similarity search
-               (e.g. "likes_jazz", "lives_in_paris").
+        - key: concise, embedding-friendly, space-separated query text used for
+               similarity search.
         - top_k: maximum number of nearest memories to return.
 
         Returns a dict with `results` (memory items including stored value).
@@ -67,13 +82,18 @@ def build_mcp(collection_name: str = "memories") -> FastMCP:
     async def forget(key: str, top_k: int = 3, ctx: Optional[Context] = None):
         """Delete stored memories that match a query key.
 
+        IMPORTANT: Deletion operates on short, canonical keys. The LLM MUST issue
+        forget calls using the same concise, embedding-optimized, space-separated
+        key style used to create memories (otherwise relevant memories may not be
+        found). Prefer 1–5 words separated by spaces when requesting deletions.
+
         This tool SHOULD be called by the LLM when the user explicitly requests that
         certain stored information be forgotten or removed (for example: "forget
         that I live in Paris") or when the assistant decides a memory must be
         purged because it is incorrect or sensitive.
 
         Parameters:
-        - key: concise query text used to find candidate memories to delete.
+        - key: concise, canonical, space-separated query text used to find candidate memories to delete.
         - top_k: number of nearest matches to consider for deletion.
 
         Behavior:
