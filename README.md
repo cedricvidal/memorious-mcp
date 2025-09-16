@@ -2,40 +2,59 @@
 
 ![memorious-mcp logo](doc/logo.jpg)
 
-Memorious-MCP is a minimal Model Context Protocol (MCP) server that provides a persistent key-value memory store with vector-similarity lookup using ChromaDB.
+A persistent semantic memory server for AI assistants using the Model Context Protocol (MCP). Built with ChromaDB for vector similarity search and FastMCP for efficient tool implementation. **Runs entirely locally** - no data ever leaves your machine.
 
-## Features
-- FastMCP-based MCP stdio server exposing three tools: `store`, `recall`, and `forget`.
-- ChromaDB backend (`ChromaMemoryBackend`) persisting data on disk using Chroma's PersistentClient.
-- Tests (integration) that exercise store/recall/forget behavior.
-- Standard Python package layout for easy installation and distribution.
+## Overview
 
-## Getting Started
+memorious-mcp provides AI assistants with long-term memory capabilities through three core operations: `store`, `recall`, and `forget`. It uses ChromaDB's vector database to enable semantic similarity search, allowing assistants to retrieve relevant memories even when the exact wording differs from the original storage. **All processing and storage happens locally on your machine**, ensuring complete privacy and security.
 
-1. Install the package (recommended in a virtual environment):
+## Key Features
+
+- **100% Local & Private**: All data processing and storage happens on your machine - nothing goes to the cloud
+- **Persistent Memory**: Data persists across sessions using ChromaDB's disk-based storage
+- **Semantic Search**: Vector embeddings enable similarity-based memory retrieval
+- **Simple API**: Three intuitive tools for memory management
+- **FastMCP Integration**: Built on FastMCP for efficient MCP server implementation
+- **Canonical Key Design**: Optimized for short, embedding-friendly keys (1-5 words)
+- **Secure by Design**: No external API calls or cloud dependencies required
+
+## Tools
+
+### `store`
+Store facts, preferences, or information with short canonical keys optimized for vector similarity.
+
+**Parameters:**
+- `key` (string): Short, canonical key (1-5 words, space-separated)
+- `value` (string): The actual information to store
+
+### `recall`
+Retrieve stored memories using semantic similarity search.
+
+**Parameters:**
+- `key` (string): Query key for similarity search
+- `top_k` (int, default: 3): Maximum number of results to return
+
+### `forget`
+Delete memories matching a query key.
+
+**Parameters:**
+- `key` (string): Query key to find memories to delete
+- `top_k` (int, default: 3): Number of nearest matches to consider
+
+## Installation
 
 ```bash
-# Install in development mode
+# Install via uvx (recommended)
+uvx memorious-mcp
+
+# Or install in virtual environment
 uv sync
-
-# Or install from source
-pip install .
-```
-
-2. Run the server (stdio transport, suitable for local/CLI integrations):
-
-```bash
-# Using uv
 uv run memorious-mcp
 ```
 
-3. Call tools using an MCP client (FastMCP client or a compatible MCP client) over stdio.
+## Configuration
 
-## MCP Client configuration
-
-To use memorious-mcp with a MCP client, add the following configuration to your `mcp.json` or equivalent file:
-
-**Configuration:**
+Add to your MCP client configuration:
 
 ```json
 {
@@ -60,6 +79,14 @@ For development/local installation:
   }
 }
 ```
+
+## Use Cases
+
+- **Personal Assistant Memory**: Remember user preferences, habits, and personal information
+- **Context Preservation**: Maintain conversation context across sessions
+- **Knowledge Management**: Store and retrieve project-specific information
+- **Personalization**: Enable AI assistants to provide personalized responses based on stored preferences
+- **Privacy-First AI**: Keep sensitive personal data local while still having persistent memory
 
 ## Claude CLI Configuration
 
@@ -100,6 +127,15 @@ uv run python -m pytest tests/ -v
 pytest tests/ -v
 ```
 
+## Technical Details
+
+- **Backend**: ChromaDB with persistent disk storage
+- **Embeddings**: Uses ChromaDB's default embedding function (local processing)
+- **Storage Location**: `./.memorious` directory (configurable)
+- **Python Version**: Requires Python ≥3.12
+- **License**: MIT
+- **Privacy**: No network requests, no cloud dependencies, all data stays local
+
 ## Package Structure
 
 The project follows the standard Python package layout:
@@ -120,11 +156,7 @@ memorious-mcp/
 └── README.md
 ```
 
-## Notes
-
-- By default memory persistence is enabled and stored under `./.memorious`. You can override `persist_directory` when creating `ChromaMemoryBackend` in code.
-- The backend uses Chroma's default embedding function when available.
-- The package is configured with a console script entry point for easy command-line usage.
+The server is designed for local/CLI integrations using stdio transport, making it suitable for personal AI assistants and development workflows where privacy and data security are paramount.
 
 ## Contributing
 
