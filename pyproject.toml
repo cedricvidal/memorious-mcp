@@ -1,7 +1,7 @@
 [project]
 name = "memorious-mcp"
 version = "0.1.0"
-description = "Persistent key-value memory MCP server with ChromaDB backend and FastMCP tools"
+description = "Persistent semantic key-value memory MCP server with ChromaDB backend"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -10,6 +10,10 @@ dependencies = [
     "fastmcp>=2.0.0",
     "pytest>=8.4.2",
 ]
+license = { text = "MIT" }
+authors = [
+  { name = "Cedric Vidal", email = "cedric.vidal@gmail.com" },
+]
 
 [project.optional-dependencies]
 dev = [
@@ -17,12 +21,7 @@ dev = [
     "pyyaml>=6.0",
 ]
 
-[tool.pytest.ini_options]
-markers = [
-  "integration: mark tests as integration tests",
-]
-
-[project.authors]
-name = ""
-
-license = { text = "MIT" }
+[project.urls]
+Documentation = "https://github.com/cedricvidal/memorious-mcp#readme"
+Issues = "https://github.com/cedricvidal/memorious-mcp/issues"
+Source = "https://github.com/cedricvidal/memorious-mcp"
