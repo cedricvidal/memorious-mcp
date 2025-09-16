@@ -21,6 +21,11 @@ def build_mcp(collection_name: str = "memories") -> FastMCP:
     async def store(key: str, value: str, ctx: Optional[Context] = None):
         """Store a user's fact, piece of information, or preference for later recall.
 
+        CRITICAL SECURITY WARNING: NEVER EVER store secrets, passwords, API keys,
+        authentication tokens, private keys, or any other sensitive credentials.
+        This storage is NOT secure and should only be used for non-sensitive
+        information like preferences, facts, and general user data.
+
         IMPORTANT: `key` MUST be short, canonical, and optimized for
         embedding/vector similarity lookups. Prefer 1–5 words separated by spaces
         (for example: "likes jazz", "pref cuisine italian", "lives in paris").

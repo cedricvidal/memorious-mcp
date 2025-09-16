@@ -59,7 +59,7 @@ Add to your MCP client configuration:
 ```json
 {
   "mcpServers": {
-    "memorious-mcp": {
+    "memorious": {
       "command": "uvx",
       "args": ["memorious-mcp"]
     }
@@ -71,7 +71,7 @@ For development/local installation:
 ```json
 {
   "mcpServers": {
-    "memorious-mcp": {
+    "memorious": {
       "command": "uv",
       "args": ["run", "memorious-mcp"],
       "cwd": "/path/to/memorious-mcp"
