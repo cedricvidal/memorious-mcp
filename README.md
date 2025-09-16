@@ -17,6 +17,13 @@ memorious-mcp provides AI assistants with long-term memory capabilities through 
 - 🚀 **FastMCP Integration**: Built on FastMCP for efficient MCP server implementation
 - 🎯 **Canonical Key Design**: Optimized for short, embedding-friendly keys (1-5 words)
 
+## Why This Project Exists
+
+🔍 **Gap in the MCP Ecosystem**: Despite the growing popularity of memory MCP servers, there wasn't an existing memory server that combines **both** semantic similarity search **and** complete file based folder scoped local storage. Most memory solutions either:
+- ☁️ Require cloud services and external API calls (compromising privacy) for either embeddings or storage or both
+- 🔤 Only support exact key-value matching (no semantic understanding)
+- 📁 Don't support folder scoped local storage
+
 ## Tools
 
 ### `store`
