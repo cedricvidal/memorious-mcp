@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/cedricvidal-memorious-mcp-badge.png)](https://mseep.ai/app/cedricvidal-memorious-mcp)
+
 # memorious-mcp
 
 ![memorious-mcp logo](doc/logo.jpg)
