@@ -1,4 +1,5 @@
 build:
+    rm -rf ./dist/*
     uv run python -m build
 
 upload-testpypi:

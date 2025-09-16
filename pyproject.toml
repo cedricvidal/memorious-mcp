@@ -1,6 +1,6 @@
 [project]
 name = "memorious-mcp"
-version = "0.0.1"
+version = "0.0.2"
 description = "Persistent semantic key-value memory MCP server with ChromaDB backend"
 readme = "README.md"
 requires-python = ">=3.12"

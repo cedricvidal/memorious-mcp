@@ -885,7 +885,7 @@ wheels = [
 
 [[package]]
 name = "memorious-mcp"
-version = "0.0.1"
+version = "0.0.2"
 source = { editable = "." }
 dependencies = [
     { name = "chromadb" },
