@@ -1,6 +1,9 @@
 # memorious-mcp
 
-![memorious-mcp logo](doc/logo.jpg)
+<div align="center">
+  <img src="doc/logo.jpg" alt="memorious-mcp logo">
+</div>
+<br/>
 
 A **100% local & private** semantic memory MCP (Model Context Protocol) server for AI assistants. Built with ChromaDB for vector similarity search and [FastMCP 2](https://gofastmcp.com/). **Runs entirely locally** - no data ever leaves your machine.
 
