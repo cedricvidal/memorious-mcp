@@ -2,11 +2,11 @@
 
 ![memorious-mcp logo](doc/logo.jpg)
 
-A persistent semantic memory server for AI assistants using the Model Context Protocol (MCP). Built with ChromaDB for vector similarity search and FastMCP for efficient tool implementation. **Runs entirely locally** - no data ever leaves your machine.
+A **100% local & private** semantic memory MCP (Model Context Protocol) server for AI assistants. Built with ChromaDB for vector similarity search and [FastMCP 2](https://gofastmcp.com/). **Runs entirely locally** - no data ever leaves your machine.
 
 ## Overview
 
-memorious-mcp provides AI assistants with long-term memory capabilities through three core operations: `store`, `recall`, and `forget`. It uses ChromaDB's vector database to enable semantic similarity search, allowing assistants to retrieve relevant memories even when the exact wording differs from the original storage. **All processing and storage happens locally on your machine**, ensuring complete privacy and security.
+memorious-mcp provides AI assistants with long-term memory capabilities through three core operations: `store`, `recall`, and `forget`. It uses ChromaDB's vector database to enable semantic similarity search, allowing assistants to retrieve relevant memories even when the exact wording differs from the original storage. **All processing and storage happens locally on your machine** - no data ever leaves your machine, ensuring complete privacy and security.
 
 ## Key Features
 
