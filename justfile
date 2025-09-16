@@ -9,3 +9,6 @@ upload-pypi:
 
 run-from-testpypi:
     uvx --default-index https://test.pypi.org/simple/ --index https://pypi.org/simple/ memorious-mcp
+
+run-from-pypi:
+    uvx memorious-mcp

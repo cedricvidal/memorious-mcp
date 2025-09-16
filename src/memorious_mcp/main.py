@@ -13,7 +13,7 @@ def build_mcp(collection_name: str = "memories") -> FastMCP:
     """
     Build a FastMCP server instance and register store/recall/forget tools.
     """
-    mcp = FastMCP("MemoryMCP")
+    mcp = FastMCP("MemoriousMCP")
     # attach a MemoryStore instance to the server for tool implementations
     memory = ChromaMemoryBackend(collection_name=collection_name)
 
