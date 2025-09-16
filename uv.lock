@@ -765,18 +765,6 @@ wheels = [
 ]
 
 [[package]]
-name = "lazy-loader"
-version = "0.4"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "packaging" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/6f/6b/c875b30a1ba490860c93da4cabf479e03f584eba06fe5963f6f6644653d8/lazy_loader-0.4.tar.gz", hash = "sha256:47c75182589b91a4e1a85a136c074285a5ad4d9f39c63e0d7fb76391c4574cd1", size = 15431, upload-time = "2024-04-05T13:03:12.261Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/83/60/d497a310bde3f01cb805196ac61b7ad6dc5dcf8dce66634dc34364b20b4f/lazy_loader-0.4-py3-none-any.whl", hash = "sha256:342aa8e14d543a154047afb4ba8ef17f5563baad3fc610d7b15b213b0f119efc", size = 12097, upload-time = "2024-04-05T13:03:10.514Z" },
-]
-
-[[package]]
 name = "lazy-object-proxy"
 version = "1.12.0"
 source = { registry = "https://pypi.org/simple" }
@@ -894,6 +882,34 @@ sdist = { url = "https://files.pythonhosted.org/packages/d6/54/cfe61301667036ec9
 wheels = [
     { url = "https://files.pythonhosted.org/packages/b3/38/89ba8ad64ae25be8de66a6d463314cf1eb366222074cfda9ee839c56a4b4/mdurl-0.1.2-py3-none-any.whl", hash = "sha256:84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8", size = 9979, upload-time = "2022-08-14T12:40:09.779Z" },
 ]
+
+[[package]]
+name = "memorious-mcp"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "chromadb" },
+    { name = "fastmcp" },
+    { name = "mcp", extra = ["cli"] },
+    { name = "pytest" },
+]
+
+[package.optional-dependencies]
+dev = [
+    { name = "pytest" },
+    { name = "pyyaml" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "chromadb", specifier = ">=1.0.21" },
+    { name = "fastmcp", specifier = ">=2.0.0" },
+    { name = "mcp", extras = ["cli"], specifier = ">=1.14.0" },
+    { name = "pytest", specifier = ">=8.4.2" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0" },
+    { name = "pyyaml", marker = "extra == 'dev'", specifier = ">=6.0" },
+]
+provides-extras = ["dev"]
 
 [[package]]
 name = "mmh3"
@@ -1649,47 +1665,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/f6/b0/4bc07ccd3572a2f9d
 wheels = [
     { url = "https://files.pythonhosted.org/packages/5f/ed/539768cf28c661b5b068d66d96a2f155c4971a5d55684a514c1a0e0dec2f/python_dotenv-1.1.1-py3-none-any.whl", hash = "sha256:31f23644fe2602f88ff55e1f5c79ba497e01224ee7737937930c448e4d0e24dc", size = 20556, upload-time = "2025-06-24T04:21:06.073Z" },
 ]
-
-[[package]]
-name = "python-kv"
-version = "0.3.11"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "lazy-loader" },
-    { name = "pydantic" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/e5/14/89d9902a3f15c606ed22ca029cf34fd4941be5eae89bef3551871ca9dc01/python_kv-0.3.11.tar.gz", hash = "sha256:31692c24fbddb99857b00f05fa82b00a4f6d020f23d095aafa5112097ce3b79b", size = 16468, upload-time = "2024-11-20T22:05:47.728Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/a3/4e/f745c7f9990f4dcca5a405da8497a1fd99acefcf2c55aba3ee53ebe151d7/python_kv-0.3.11-py3-none-any.whl", hash = "sha256:a9597e616b8568fe8fed6fc9dd4dc8440e7ef58fcd49fd12dff4e2518bff56ce", size = 25038, upload-time = "2024-11-20T22:05:46.592Z" },
-]
-
-[[package]]
-name = "python-kv-memory-mcp"
-version = "0.1.0"
-source = { virtual = "." }
-dependencies = [
-    { name = "chromadb" },
-    { name = "fastmcp" },
-    { name = "mcp", extra = ["cli"] },
-    { name = "pytest" },
-    { name = "python-kv" },
-]
-
-[package.optional-dependencies]
-dev = [
-    { name = "pytest" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "chromadb", specifier = ">=1.0.21" },
-    { name = "fastmcp", specifier = ">=2.0.0" },
-    { name = "mcp", extras = ["cli"], specifier = ">=1.14.0" },
-    { name = "pytest", specifier = ">=8.4.2" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0" },
-    { name = "python-kv", specifier = ">=0.3.11" },
-]
-provides-extras = ["dev"]
 
 [[package]]
 name = "python-multipart"
