@@ -4,7 +4,7 @@ import yaml
 from pathlib import Path
 from typing import Optional, Dict, Any
 
-import backends.chroma_backend as cb
+from memorious_mcp.backends import chroma_backend as cb
 
 
 def test_store_and_recall_exact(tmp_path):

@@ -4,7 +4,7 @@ import uuid
 import chromadb
 from typing import List, Dict, Any, Optional
 from abc import ABC, abstractmethod
-from backends.memory_backend import MemoryBackend
+from .memory_backend import MemoryBackend
 from chromadb.config import Settings
 from datetime import datetime, timezone
 

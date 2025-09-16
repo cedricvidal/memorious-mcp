@@ -6,7 +6,7 @@ from typing import List, Dict, Any, Optional
 
 from fastmcp import FastMCP, Context
 
-from backends.chroma_backend import ChromaMemoryBackend
+from .backends.chroma_backend import ChromaMemoryBackend
 
 
 def build_mcp(collection_name: str = "memories") -> FastMCP:
