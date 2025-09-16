@@ -176,6 +176,18 @@ memorious-mcp/
 
 The server is designed for local/CLI integrations using stdio transport, making it suitable for personal AI assistants and development workflows where privacy and data security are paramount.
 
+## Limitations
+
+⚠️ **Important Security Considerations**
+
+While your data is **100% safe and private** because it never leaves your local machine, you should still exercise caution about what you store:
+
+- **Data is stored unencrypted**: All stored data is persisted to disk in unencrypted format in the `.memorious` directory
+- **Avoid storing secrets**: Do NOT store passwords, API keys, private keys, personal identification numbers, financial information, or any other sensitive credentials
+- **Local file access**: Anyone with access to your machine and the `.memorious` directory can read all stored memories
+- **Exercise caution**: While the MCP server warns the client LLM to avoid storing sensitive information, you should not rely solely on this safeguard
+- **Backup considerations**: Be mindful when backing up or syncing directories containing `.memorious` folders
+
 ## Contributing
 
 Contributions are welcome. Open a PR with tests.
