@@ -4,6 +4,8 @@
 
 A **100% local & private** semantic memory MCP (Model Context Protocol) server for AI assistants. Built with ChromaDB for vector similarity search and [FastMCP 2](https://gofastmcp.com/). **Runs entirely locally** - no data ever leaves your machine.
 
+[![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_Memorious_MCP-0098FF?style=flat-square&logo=visualstudiocode&logoColor=ffffff)](vscode:mcp/install?%7B%22name%22%3A%22memorious%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22memorious-mcp%22%5D%7D)
+
 ## Overview
 
 memorious-mcp provides AI assistants with long-term memory capabilities through three core operations: `store`, `recall`, and `forget`. It uses ChromaDB's vector database to enable semantic similarity search, allowing assistants to retrieve relevant memories even when the exact wording differs from the original storage. **All processing and storage happens locally on your machine** - no data ever leaves your machine, ensuring complete privacy and security.
@@ -36,16 +38,15 @@ memorious-mcp provides AI assistants with long-term memory capabilities through 
 
 ## Installation
 
-```bash
-# Install via uvx (recommended)
-uvx memorious-mcp
+### For VS Code
 
-# Or install in virtual environment
-uv sync
-uv run memorious-mcp
-```
+Make sure you have [uv](https://docs.astral.sh/uv/) and its its `uvx` command installed first.
 
-## Configuration
+[![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_Memorious_MCP-0098FF?style=flat-square&logo=visualstudiocode&logoColor=ffffff)](vscode:mcp/install?%7B%22name%22%3A%22memorious%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22memorious-mcp%22%5D%7D)
+
+[![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install_Memorious_MCP-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=ffffff)](vscode-insiders:mcp/install?%7B%22name%22%3A%22memorious%22%2C%22type%22%3A%22stdio%22%2C%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22memorious-mcp%22%5D%7D)
+
+### For most MCP clients
 
 Add to your MCP client configuration:
 
@@ -58,6 +59,12 @@ Add to your MCP client configuration:
     }
   }
 }
+```
+
+## Development / Local Installation
+
+```
+uv sync
 ```
 
 For development/local installation:
