@@ -10,13 +10,12 @@ memorious-mcp provides AI assistants with long-term memory capabilities through 
 
 ## Key Features
 
-- **100% Local & Private**: All data processing and storage happens on your machine - nothing goes to the cloud
-- **Persistent Memory**: Data persists across sessions using ChromaDB's disk-based storage
-- **Semantic Search**: Vector embeddings enable similarity-based memory retrieval
-- **Simple API**: Three intuitive tools for memory management
-- **FastMCP Integration**: Built on FastMCP for efficient MCP server implementation
-- **Canonical Key Design**: Optimized for short, embedding-friendly keys (1-5 words)
-- **Secure by Design**: No external API calls or cloud dependencies required
+- 🏠 **100% Local & Private**: All data processing and storage happens on your machine - nothing goes to the cloud
+- 💾 **Persistent Memory**: Data persists across sessions using ChromaDB's disk-based storage
+- 🔍 **Semantic Search**: Vector embeddings enable similarity-based memory retrieval
+- ⚡ **Simple API**: Three intuitive tools for memory management
+- 🚀 **FastMCP Integration**: Built on FastMCP for efficient MCP server implementation
+- 🎯 **Canonical Key Design**: Optimized for short, embedding-friendly keys (1-5 words)
 
 ## Tools
 
