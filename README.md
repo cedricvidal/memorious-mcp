@@ -1,5 +1,7 @@
 # memorious-mcp
 
+![memorious-mcp logo](doc/logo.jpg)
+
 Memorious-MCP is a minimal Model Context Protocol (MCP) server that provides a persistent key-value memory store with vector-similarity lookup using ChromaDB.
 
 ## Features
@@ -24,13 +26,62 @@ pip install .
 
 ```bash
 # Using uv
-uv run memorious-mcp --collection memories
-
-# Or if installed globally
-memorious-mcp --collection memories
+uv run memorious-mcp
 ```
 
 3. Call tools using an MCP client (FastMCP client or a compatible MCP client) over stdio.
+
+## MCP Client configuration
+
+To use memorious-mcp with a MCP client, add the following configuration to your `mcp.json` or equivalent file:
+
+**Configuration:**
+
+```json
+{
+  "mcpServers": {
+    "memorious-mcp": {
+      "command": "uvx",
+      "args": ["memorious-mcp"]
+    }
+  }
+}
+```
+
+For development/local installation:
+```json
+{
+  "mcpServers": {
+    "memorious-mcp": {
+      "command": "uv",
+      "args": ["run", "memorious-mcp"],
+      "cwd": "/path/to/memorious-mcp"
+    }
+  }
+}
+```
+
+## Claude CLI Configuration
+
+To add memorious-mcp to Claude CLI, use the following commands:
+
+```bash
+# Add the MCP server using uvx (recommended)
+claude mcp add memorious-mcp uvx memorious-mcp
+
+# Alternative: for development/local installation
+claude mcp add memorious-mcp uv run memorious-mcp --cwd /path/to/memorious-mcp
+```
+
+You can then list your configured MCP servers:
+```bash
+claude mcp list
+```
+
+And remove the server if needed:
+```bash
+claude mcp remove memorious-mcp
+```
 
 ## Example Tool Signatures
 - `store(key: str, value: str) -> {"id": str}`
