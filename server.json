@@ -1,0 +1,14 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "name": "io.github.cedricvidal/memorious-mcp",
+  "description": "Persistent semantic key-value memory MCP server with ChromaDB backend",
+  "version": "0.0.2",
+  "packages": [
+    {
+      "registry_type": "pypi",
+      "identifier": "memorious-mcp",
+      "version": "0.0.2",
+      "transport": { "type": "stdio" }
+    }
+  ]
+}

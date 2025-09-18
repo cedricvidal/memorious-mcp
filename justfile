@@ -13,3 +13,12 @@ run-from-testpypi:
 
 run-from-pypi:
     uvx memorious-mcp
+
+install-mcp-publisher:
+    curl -L "https://github.com/modelcontextprotocol/registry/releases/download/v1.0.0/mcp-publisher_1.0.0_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+
+mcp-login:
+    ./mcp-publisher login github-oidc
+
+mcp-upload:
+    ./mcp-publisher publish

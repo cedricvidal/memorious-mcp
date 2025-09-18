@@ -1,4 +1,5 @@
 # memorious-mcp
+<!-- mcp-name: io.github.cedricvidal/memorious-mcp -->
 
 <div align="center">
 
