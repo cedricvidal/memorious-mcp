@@ -9,3 +9,5 @@ wheels/
 # Virtual environments
 .venv
 .memorious/
+tmp/
+.mcpregistry*
