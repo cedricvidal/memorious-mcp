@@ -9,13 +9,13 @@ from fastmcp import FastMCP, Context
 from .backends.chroma_backend import ChromaMemoryBackend
 
 
-def build_mcp(collection_name: str = "memories") -> FastMCP:
+def build_mcp(collection_name: str = "memories", persist_directory: Optional[str] = None) -> FastMCP:
     """
     Build a FastMCP server instance and register store/recall/forget tools.
     """
     mcp = FastMCP("MemoriousMCP")
     # attach a MemoryStore instance to the server for tool implementations
-    memory = ChromaMemoryBackend(collection_name=collection_name)
+    memory = ChromaMemoryBackend(collection_name=collection_name, persist_directory=persist_directory)
 
     @mcp.tool
     async def store(key: str, value: str, ctx: Optional[Context] = None):
@@ -117,11 +117,13 @@ def build_mcp(collection_name: str = "memories") -> FastMCP:
 def main():
     parser = argparse.ArgumentParser("mcp-memory-stdio-server")
     parser.add_argument("--collection", default="memories", help="ChromaDB collection name to use")
+    parser.add_argument("--persist-directory", default=None, help="Directory where ChromaDB will persist data (defaults to ./.memorious)")
     args = parser.parse_args()
 
-    mcp = build_mcp(collection_name=args.collection)
+    mcp = build_mcp(collection_name=args.collection, persist_directory=args.persist_directory)
 
-    print("Starting FastMCP stdio MCP server using collection '%s'" % args.collection)
+    persist_dir = args.persist_directory or "./.memorious"
+    print("Starting FastMCP stdio MCP server using collection '%s' with persistence in '%s'" % (args.collection, persist_dir))
     # Default transport is STDIO for FastMCP; run the server and accept MCP stdio calls
     mcp.run()
 
