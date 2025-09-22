@@ -113,7 +113,7 @@ To add memorious-mcp to Claude CLI, use the following commands:
 claude mcp add memorious-mcp uvx memorious-mcp
 
 # Alternative: for development/local installation
-claude mcp add memorious-mcp uv run memorious-mcp --cwd /path/to/memorious-mcp
+claude mcp add memorious-mcp uv run --project <memorious_mcp_src> memorious-mcp
 ```
 
 You can then list your configured MCP servers:
