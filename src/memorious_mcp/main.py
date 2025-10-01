@@ -59,7 +59,7 @@ def build_mcp(collection_name: str = "memories", persist_directory: Optional[str
 
         IMPORTANT: To get reliable results the LLM MUST query with the same short,
         canonical, embedding-optimized keys used at store time. Keys should be
-        compact (1–5 words, space-separated) and represent the core concept — avoid
+        compact (1-5 words, space-separated) and represent the core concept — avoid
         long descriptive queries. If the current user utterance is verbose, the
         LLM should first map or canonicalize it to an appropriate short key before
         calling this tool (for example map "I really like listening to jazz music"
@@ -73,7 +73,8 @@ def build_mcp(collection_name: str = "memories", persist_directory: Optional[str
         Parameters:
         - key: concise, embedding-friendly, space-separated query text used for
                similarity search.
-        - top_k: maximum number of nearest memories to return.
+        - top_k: maximum number of nearest memories to return. Use top_k=3 by default 
+               unless explicitly requested otherwise by the user.
 
         Returns a dict with `results` (memory items including stored value).
         If nothing matches, `results` is empty.
